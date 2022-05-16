@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
       - name: Install SQLFluff on the image
-        run: |
-          python -m pip install --upgrade pip
-          pip install sqlfluff
-          sqlfluff lint models/* --dialect snowflake
+        run: "pip install sqlfluff=0.3.6"
+      - name: Lint models
+        run: "sqlfluff lint models --dialect snowflake"

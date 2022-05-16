@@ -3,7 +3,7 @@ name: dbt lint on push
 on:
   push:
     branches-ignore:
-      - 'main'
+      - 'sandbox_work'
 
 jobs:
   run_sql_fluff:

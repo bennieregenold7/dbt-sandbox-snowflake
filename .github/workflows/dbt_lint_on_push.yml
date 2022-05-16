@@ -1,0 +1,17 @@
+name: dbt lint on push
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  run_sql_fluff:
+    name: run SQLFluff
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install SQLFluff on the image
+        run: |
+          python -m pip install --upgrade pip
+          pip install sqlfluff

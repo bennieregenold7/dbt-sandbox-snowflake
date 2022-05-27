@@ -27,4 +27,4 @@ jobs:
         with:
           python-version: "3.9"
       - name: Run dbt Cloud job
-        script: "python ./.github/workflows/run_and_monitor_dbt_job.py"
+        run: "python ./.github/workflows/run_and_monitor_dbt_job.py"

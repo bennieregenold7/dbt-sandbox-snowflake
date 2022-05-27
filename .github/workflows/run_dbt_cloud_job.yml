@@ -1,0 +1,31 @@
+name: run dbt job on commit
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+jobs:
+  run_dbt_cloud_job:
+    name: Run dbt Cloud Job
+    runs-on: ubuntu-latest
+    # environment needs to match the one where you API key is stored
+    environment: development
+
+    # Set the environment variables needed for the run
+    env:
+      DBT_CLOUD_HOST: cloud.getdbt.com
+      DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_API_KEY }}
+      DBT_CLOUD_ACCOUNT_ID: 51798
+      DBT_CLOUD_JOB_ID: 85141
+
+
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: Install dbt Cloud runner
+        run: "pip install dbt-cloud-cli"
+      - name: Run the dbt Cloud job
+        run: "dbt-cloud job run"

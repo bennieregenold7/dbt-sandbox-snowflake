@@ -14,10 +14,11 @@ jobs:
 
     # Set the environment variables needed for the run
     env:
-      DBT_CLOUD_HOST: cloud.getdbt.com
-      DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_API_KEY }}
-      DBT_CLOUD_ACCOUNT_ID: 51798
-      DBT_CLOUD_JOB_ID: 85141
+      DBT_API_KEY: ${{ secrets.DBT_CLOUD_API_KEY }}
+      DBT_ACCOUNT_ID: 51798
+      DBT_PROJECT_ID: 99481
+      DBT_PR_JOB_ID: 85141
+      DBT_JOB_BRANCH: ${{ GITHUB_REF_NAME }}
 
 
     steps:
@@ -25,7 +26,5 @@ jobs:
       - uses: "actions/setup-python@v2"
         with:
           python-version: "3.9"
-      - name: Install dbt Cloud runner
-        run: "pip install dbt-cloud-cli"
-      - name: Run the dbt Cloud job
-        run: "dbt-cloud job run"
+      - name: Run dbt Cloud job
+        script: "python ./.github/workflows/run_and_monitor_dbt_job.py"

@@ -1,11 +1,13 @@
-import requests
+from urllib.request import Request, urlopen
+from urllib import parse
 import os
 import time
+import json
 
 #------------------------------------------------------------------------------
 # get environment variables
 #------------------------------------------------------------------------------
-api_base        = os.getenv('DBT_URL', 'https://cloud.getdbt.com') # default to multitenant url
+api_base        = os.getenv('DBT_URL', 'https://cloud.getdbt.com/') # default to multitenant url
 job_cause       = os.getenv('DBT_JOB_CAUSE', 'API-triggered job') # default to generic message
 git_branch      = os.getenv('DBT_JOB_BRANCH', None) # default to None
 schema_override = os.getenv('DBT_JOB_SCHEMA_OVERRIDE', None) # default to None
@@ -56,7 +58,13 @@ def run_job(url, headers, cause, branch=None, schema_override=None ) -> int:
 
   # trigger job
   print(f'Triggering job:\n\turl: {url}\n\tpayload: {req_payload}')
-  run_job_resp = requests.post(url, headers=headers, data=req_payload).json()
+
+  data = parse.urlencode(req_payload).encode()
+
+  request = Request(method='POST', data=data, headers=headers, url=url)
+  with urlopen(request) as req:
+    response = req.read().decode('utf-8')
+    run_job_resp = json.loads(response)
 
   # return run id
   return run_job_resp['data']['id']
@@ -67,7 +75,11 @@ def get_run_status(url, headers) -> str:
   gets the status of a running dbt job
   """
   # get status
-  req_status_resp = requests.get(url, headers=headers).json()
+  request = Request(headers=headers, url=url)
+
+  with urlopen(request) as req:
+    response = req.read().decode('utf-8')
+    req_status_resp = json.loads(response)
 
   # return status
   run_status_code = req_status_resp['data']['status']

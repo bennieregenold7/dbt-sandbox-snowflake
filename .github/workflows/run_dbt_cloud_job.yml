@@ -9,8 +9,6 @@ jobs:
   run_dbt_cloud_job:
     name: Run dbt Cloud Job
     runs-on: ubuntu-latest
-    # environment needs to match the one where you API key is stored
-    environment: development
 
     # Set the environment variables needed for the run
     env:

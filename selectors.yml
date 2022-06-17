@@ -1,0 +1,4 @@
+selectors:
+  - name: example_project
+    definition:
+      'models/example/'

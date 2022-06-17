@@ -6,6 +6,8 @@ jobs:
   drop_branch_schema:
     name: Drop branch schema if it still exists
     runs-on: ubuntu-latest
+    # Only run if the delete is a branch
+    if: github.event.ref_type == 'branch'
 
     # Set the environment variables needed for the run
     env:
@@ -14,8 +16,7 @@ jobs:
       DBT_PR_JOB_ID: 97206
       DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
       DBT_JOB_CAUSE: 'GitHub Pipeline CI Job' 
-      DBT_JOB_BRANCH: ${{ github.ref_name }}
-      DBT_JOB_SCHEMA_OVERRIDE: DBT_GITHUB_PIPELINE_${{ github.ref_name }}
+      DBT_JOB_SCHEMA_OVERRIDE: DBT_GITHUB_PIPELINE_${{ github.event.ref }}
 
     steps:
       - uses: "actions/checkout@v3"

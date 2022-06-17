@@ -1,6 +1,6 @@
 name: drop branch schema on merge
 
-on: [delete]
+on: delete
 
 jobs:
   drop_branch_schema:

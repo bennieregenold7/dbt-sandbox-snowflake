@@ -1,0 +1,4 @@
+packages:
+
+  - git: "https://github.com/dbt-labs/dbt-project-evaluator.git"
+    revision: main

@@ -1,0 +1,21 @@
+name: dbt lint on push
+
+on:
+  push:
+    branches-ignore:
+      - 'sandbox_work'
+
+jobs:
+  run_sql_fluff:
+    name: run SQLFluff
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: Install SQLFluff on the image
+        run: "pip install sqlfluff==0.3.6"
+      - name: Lint models
+        run: "sqlfluff lint models --dialect snowflake"

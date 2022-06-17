@@ -11,4 +11,5 @@ with t1 as (
     select *
     from {{ ref('my_unrelated_model') }}
 )
+
 select * from t1

@@ -27,3 +27,19 @@ jobs:
           python-version: "3.9"
       - name: Run dbt Cloud job
         run: "python ./.github/workflows/run_and_monitor_dbt_job.py"
+
+  lint_project:
+    name: Run SQLFluff linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: Install SQLFluff
+        run: 
+          - "pip install --upgrade pip"
+          - "pip install sqlfluff==0.13.1"
+      - name: Lint project
+        run: "sqlfluff lint models --dialect snowflake --rules L019,L020,L021,L022"

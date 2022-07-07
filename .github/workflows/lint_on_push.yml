@@ -3,7 +3,7 @@ name: lint dbt project on push
 on:
   push:
     branches-ignore:
-    - 'main'
+      - 'main'
 
 jobs:
 # this job runs SQLFluff with a specific set of rules

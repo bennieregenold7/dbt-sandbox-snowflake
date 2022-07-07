@@ -2,7 +2,7 @@ name: lint dbt project on push
 
 on:
   push:
-  branches-ignore:
+    branches-ignore:
     - 'main'
 
 jobs:

@@ -24,6 +24,12 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+vars:
+  dbt_artifacts:
+    dbt_artifacts_database: development
+    dbt_artifacts_schema: dbt_bregenold
+
+
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models

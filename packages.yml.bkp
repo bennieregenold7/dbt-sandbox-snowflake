@@ -1,4 +1,7 @@
 packages:
 
-  - git: "https://github.com/dbt-labs/dbt-project-evaluator.git"
-    revision: main
+  - package: dbt-labs/codegen
+    version: 0.7.0
+
+  - package: brooklyn-data/dbt_artifacts
+    version: 0.8.0

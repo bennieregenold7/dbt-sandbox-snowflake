@@ -31,6 +31,10 @@ vars:
 
 
 
+
+on-run-end:
+  - "{{ run_results(results) }}"
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 

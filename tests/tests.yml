@@ -1,0 +1,6 @@
+
+version: 2
+
+tests:
+  - name: sample_singluar_test
+    description: This is a sample test that will always pass

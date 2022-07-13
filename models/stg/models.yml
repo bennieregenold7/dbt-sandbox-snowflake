@@ -4,7 +4,10 @@ models:
   - name: stg_jaffle_shop__customers
     columns:
       - name: customer_id
+        description: the id for the customer
         tests:
           - unique
           - not_null
+      - name: first_name
+        description: the first name of the customer
                

@@ -19,6 +19,10 @@
 create or replace table development.dbt_bregenold.run_results_models as 
 
 {# grab all the model info #}
+{# TODO: 
+     - flatten the ColumnInfo object in columns 
+     - swap the $$ format for something database agnostics
+#}
 
     {% for result in results if result.node.resource_type == 'model' %}
         select
@@ -52,8 +56,23 @@ create or replace table development.dbt_bregenold.run_results_models as
         '{{ result.node.name }}' as name,
         '{{ result.node.resource_type }}' as resource_type,
         '{{ result.node.alias }}' as alias,
-        --checksum,
-        --config,
+        '{{ result.node.checksum.name }}' as checksum_name,
+        '{{ result.node.checksum.checksum }}' as checksum_value,
+        '{{ result.node.config._extra }}' as config__extra,
+        '{{ result.node.config.enabled }}' as config_enabled,
+        '{{ result.node.config.alias }}' as config_alias,
+        '{{ result.node.config.schema }}' as config_schema,
+        '{{ result.node.config.database }}' as config_database,
+        '{{ result.node.config.tags }}' as config_tags,
+        '{{ result.node.config.meta }}' as config_meta,
+        '{{ result.node.config.materialized }}' as config_materialized,
+        '{{ result.node.config.persist_docs }}' as config_persist_docs,
+        '{{ result.node.config.post_hook }}' as config_post_hook,
+        '{{ result.node.config.pre_hook }}' as config_pre_hook,
+        '{{ result.node.config.quoting }}' as config_quoting,
+        '{{ result.node.config.column_types }}' as config_column_types,
+        '{{ result.node.config.full_refresh }}' as config_full_refresh,
+        '{{ result.node.config.on_schema_change }}' as config_on_schema_change,
         '{{ result.node.tags }}' as tags,
         '{{ result.node.refs }}' as refs,
         $${{ result.node.sources }}$$ as sources,
@@ -78,7 +97,6 @@ create or replace table development.dbt_bregenold.run_results_models as
 
         {{ 'union all' if not loop.last }}
     {% endfor %}
-
 
 {% endif %}
 

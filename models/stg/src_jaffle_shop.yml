@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: jaffle_shop
     database: development
+    schema: "{{ env_var('DBT_JAFFLE_SHOP_SCHEMA') }}"
     tables:
       - name: orders
         freshness: 

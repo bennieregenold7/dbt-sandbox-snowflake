@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: customer_distinct_orders
+    description: '{{ doc("table_events") }}'
     columns:
       - name: customer_id
         tests:

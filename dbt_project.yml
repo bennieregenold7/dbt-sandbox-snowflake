@@ -33,7 +33,8 @@ vars:
 
 
 on-run-end:
-  - "{{ run_results(results) }}"
+#  - "{{ dbt_artifacts.upload_results(results) }}"
+  - "{{ store_test_results(results) }}"
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -46,3 +47,8 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+
+
+seeds:
+  dbt_tutorial:
+    +materialized: ephemeral

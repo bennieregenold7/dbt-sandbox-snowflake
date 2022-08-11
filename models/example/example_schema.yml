@@ -4,9 +4,13 @@ version: 2
 models:
   - name: my_first_dbt_model
     description: "A starter dbt model"
+    meta:
+      contains_pii: true
     columns:
       - name: id
         description: "The primary key for this table"
+        meta:
+          contains_pii: true
         tests:
           - unique
           - accepted_values:

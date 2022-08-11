@@ -7,6 +7,6 @@
 }}
 
 select *
-from {{ ref('src_jaffle_shop') }}
+from {{ ref('customer_distinct_orders') }}
 where
-    1=2
+    'true'='false'

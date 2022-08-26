@@ -20,7 +20,8 @@ customer_order_cnt as (
 final as (
     select
         customers.customer_id,
-        coalesce(customer_order_cnt.order_cnt, 0) as dist_order_cnt
+        coalesce(customer_order_cnt.order_cnt, 0) as dist_order_cnt,
+        current_timestamp as created_at
     from customers
         left join customer_order_cnt on 
             customers.customer_id = customer_order_cnt.customer_id

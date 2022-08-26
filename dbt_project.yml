@@ -24,31 +24,40 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-vars:
-  dbt_artifacts:
-    dbt_artifacts_database: development
-    dbt_artifacts_schema: dbt_bregenold
+# vars:
+#   dbt_artifacts:
+#     dbt_artifacts_database: development
+#     dbt_artifacts_schema: dbt_bregenold
+#   use_common_masking_policy_schema_only: "True"
+#   common_masking_policy_schema: "DBT_BREGENOLD"
 
 
 
 
-on-run-end:
-#  - "{{ dbt_artifacts.upload_results(results) }}"
-  - "{{ store_test_results(results) }}"
+# on-run-end:
+# #  - "{{ dbt_artifacts.upload_results(results) }}"
+#   - "{{ store_test_results(results) }}"
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# query-comment:
+#     comment: hello
+#     append: true
 
 # In this example config, we tell dbt to build all models in the example/ directory
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
   dbt_tutorial:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    # stg:
+    #   post-hook: 
+    #     - "{{ dbt_snow_mask.apply_masking_policy('models') }}"
+    marts:
+      +materialized: table
+      # post-hook: "{{ grant_select() }}"
+      # +grants:
+      #   select: "{{ grant_select() }}"
 
+      
 
-seeds:
-  dbt_tutorial:
-    +materialized: ephemeral

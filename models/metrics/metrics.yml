@@ -1,0 +1,16 @@
+version: 2
+
+metrics:
+  - name: orders
+    label: orders
+    model: ref('stg_jaffle_shop__orders')
+    description: "The number of orders in a given time frame"
+
+    type: count_distinct
+    sql: order_id
+
+    timestamp: order_date
+    time_grains: [day, week, month, quarter, year]
+
+    dimensions:
+      - status

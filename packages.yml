@@ -1,7 +1,10 @@
 packages:
 
-  - package: dbt-labs/codegen
-    version: 0.7.0
-
   - package: brooklyn-data/dbt_artifacts
-    version: 0.8.0
+    version: 2.1.1
+
+  - package: dbt-labs/audit_helper
+    version: 0.6.0
+
+  - git: "https://github.com/dbt-labs/dbt-codegen.git"
+    revision: "feature/generate_multiple_models_yaml"

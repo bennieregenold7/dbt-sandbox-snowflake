@@ -15,7 +15,7 @@ profile: 'snowflake'
 seed-paths: ["seeds"]
 model-paths: ["models"]
 analysis-paths: ["analyses"]
-test-paths: ["tests"]
+test-paths: ["tests","models/*/tests"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -42,3 +42,4 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+      +post-hook: "{{ dbt_tutorial.docs_test() }}"

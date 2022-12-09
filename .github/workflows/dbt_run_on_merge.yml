@@ -7,7 +7,7 @@ name: run dbt Cloud job on push
 on:
   push:
     branches:
-      - 'main'
+      - 'github-actions-script'
 
 jobs:
 

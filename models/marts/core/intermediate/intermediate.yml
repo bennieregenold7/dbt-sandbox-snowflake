@@ -4,6 +4,7 @@ models:
   - name: customer_distinct_orders
     columns:
       - name: customer_id
+        description: "{{ doc('sample_link') }}"
         tests:
           - unique
           - not_null

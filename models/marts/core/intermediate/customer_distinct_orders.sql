@@ -1,3 +1,9 @@
+{{
+    config(
+        schema='dbt_bregenold_sample'
+    )
+}}
+
 with
 
 customers as (

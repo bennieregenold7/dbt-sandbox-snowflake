@@ -1,3 +1,9 @@
+{{
+    config(
+        materialized = 'table'
+    )
+}}
+
 with 
 
 source as (
@@ -7,9 +13,10 @@ source as (
 
 renamed as (
     select
-        id as customer_id,
+        null as customer_id,
         first_name,
-        last_name
+        last_name,
+        '{{ var("some_date") }}'::timestamp as field
     from source
 )
 

@@ -27,7 +27,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 vars:
   re_data:save_test_history: true
   sample: 'table'
-  some_date: "{{ get_max_processed_date('last_processed_ts', 'audit_date') }} "
+  some_date: "{{ get_max_processed_date('last_processed_ts', 'audit_date') }}"
 
 # on-run-end: "{{ dbt_artifacts.upload_results(results) }}"
 
@@ -40,6 +40,8 @@ vars:
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
+  codegen:
+    +enabled: "var('some_date')"
   dbt_tutorial:
     # Config indicated by + and applies to all files under models/example/
     example:
